@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أميرة البرتقالي | أخصائية نفسية ومختصة في تطوير الذات وبناء العادات</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            darkest: '#140920',
+                            dark: '#1F0E2E',
+                            card: '#2B153F',
+                            lightPurple: '#4C2268',
+                            gold: '#D4AF37',
+                            goldLight: '#FFDF73',
+                            goldDark: '#AA820A'
+                        }
+                    },
+                    fontFamily: {
+                        tajawal: ['Tajawal', 'sans-serif'],
+                        cairo: ['Cairo', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 3s infinite ease-in-out',
+                        'float-slow': 'float 6s infinite ease-in-out',
+                        'sparkle-fade': 'sparkleFade 2s infinite ease-in-out',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+                            '50%': { opacity: '0.8', transform: 'scale(1.05)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        sparkleFade: {
+                            '0%, 100%': { opacity: '0.3', transform: 'scale(0.8)' },
+                            '50%': { opacity: '1', transform: 'scale(1.2)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #140920;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        /* Gold Text Gradient */
+        .gold-text-gradient {
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFDF73 45%, #D4AF37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-border-glow {
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.12);
+        }
+
+        .glass-panel {
+            background: rgba(43, 21, 63, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .glass-panel-hover {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-panel-hover:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 223, 115, 0.6);
+            box-shadow: 0 20px 40px -10px rgba(212, 175, 55, 0.25), 0 0 25px rgba(76, 34, 104, 0.5);
+        }
+
+        /* Intro Splash Overlay Animation */
+        #intro-splash {
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s;
+        }
+        
+        .intro-text-anim {
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            animation: introTextAppear 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.3s;
+        }
+
+        @keyframes introTextAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Canvas background overlay */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #140920;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2B153F;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4C2268;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-brand-gold selection:text-brand-darkest relative">
+
+    <canvas id="particle-canvas"></canvas>
+
+    <div id="intro-splash" class="fixed inset-0 z-50 bg-brand-darkest flex flex-col items-center justify-center p-6 text-center overflow-hidden">
+        <div class="absolute inset-0 bg-radial from-brand-lightPurple/20 via-brand-darkest to-brand-darkest pointer-events-none"></div>
+        
+        <!-- Glowing Ambient Circles -->
+        <div class="absolute w-96 h-96 rounded-full bg-brand-gold/10 blur-3xl animate-pulse-glow"></div>
+
+        <div class="relative z-10 max-w-xl mx-auto space-y-6 intro-text-anim">
+            <!-- Lotus/Icon Logo -->
+            <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-tr from-brand-goldDark via-brand-gold to-brand-goldLight p-1 shadow-2xl shadow-brand-gold/30 mx-auto animate-float-slow">
+                <div class="w-full h-full bg-brand-darkest rounded-full flex items-center justify-center border border-brand-gold/40">
+                    <i data-lucide="flower-2" class="w-12 h-12 text-brand-goldLight animate-pulse"></i>
+                </div>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <div>
+                <h1 class="text-3xl sm:text-5xl font-black font-cairo gold-text-gradient tracking-wide mb-2">أميرة البرتقالي</h1>
+                <p class="text-sm sm:text-lg text-purple-200/90 font-light">أخصائية نفسية ومختصة في تطوير الذات وبناء العادات</p>
+            </div>
+
+            <!-- Tagline -->
+            <div class="py-2 px-6 rounded-full bg-brand-card/60 border border-brand-gold/30 inline-block">
+                <span class="text-xs sm:text-sm text-brand-goldLight font-medium">رحلتكِ لنفسك تبدأ من هنا 🌷</span>
+            </div>
+
+            <p class="text-xs text-purple-300/70 font-light max-w-sm mx-auto">
+                ستكتشفين هنا مساحتك الخاصة للسلام الداخلي والتغيير من دون ضغوطات ولا جلد ذات.
+            </p>
+
+            <!-- Action button -->
+            <div class="pt-4">
+                <button onclick="dismissIntro()" class="px-8 py-3.5 bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-goldDark hover:brightness-110 text-brand-darkest font-black rounded-2xl shadow-xl shadow-brand-gold/20 transition-all transform hover:scale-105 active:scale-95 flex items-center gap-2 mx-auto text-sm">
+                    <span>ابدئي الرحلة الآن</span>
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="sticky top-0 z-40 bg-brand-dark/90 backdrop-blur-md border-b border-brand-gold/20 py-4 px-4 sm:px-8">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-brand-goldDark via-brand-gold to-brand-goldLight p-0.5 shadow-lg group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-brand-darkest rounded-full flex items-center justify-center">
+                        <i data-lucide="sparkles" class="w-5 h-5 text-brand-gold"></i>
+                    </div>
+                </div>
+                <div>
+                    <h1 class="text-xl font-black font-cairo text-brand-goldLight leading-tight">أميرة البرتقالي</h1>
+                    <p class="text-[11px] text-purple-200/80 font-light">أخصائية نفسية ومختصة تطوير الذات</p>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#about" class="text-gray-200 hover:text-brand-gold transition-colors">عن أميرة</a>
+                <a href="#quiz" class="text-gray-200 hover:text-brand-gold transition-colors flex items-center gap-1.5">
+                    <i data-lucide="help-circle" class="w-4 h-4 text-brand-gold"></i>
+                    اكتشفي الباقة الأنسب
+                </a>
+                <a href="#packages" class="text-gray-200 hover:text-brand-gold transition-colors">الباقات المتاحة</a>
+                <a href="#instructions" class="text-gray-200 hover:text-brand-gold transition-colors">طريقة الحجز</a>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-3">
+                <button onclick="openAdminModal()" class="px-3.5 py-2 text-xs rounded-xl border border-brand-gold/30 text-brand-goldLight hover:bg-brand-gold/10 transition-all flex items-center gap-1.5" title="لوحة تحكم المالكين">
+                    <i data-lucide="lock" class="w-3.5 h-3.5 text-brand-gold"></i>
+                    <span class="hidden sm:inline font-bold">لوحة المالكين</span>
+                </button>
+
+                <a href="#packages" class="bg-gradient-to-r from-brand-gold to-brand-goldLight hover:brightness-110 text-brand-darkest px-4 py-2 rounded-xl text-xs sm:text-sm font-black transition-all shadow-md shadow-brand-gold/20 active:scale-95">
+                    احجزي جلساتك
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <header id="about" class="relative pt-12 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden z-10">
+        <!-- Ambient Glowing Lights -->
+        <div class="absolute top-1/4 -right-28 w-96 h-96 bg-brand-lightPurple/20 rounded-full blur-3xl pointer-events-none animate-pulse-glow"></div>
+        <div class="absolute bottom-10 -left-28 w-96 h-96 bg-brand-gold/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow"></div>
+
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-brand-goldLight text-xs sm:text-sm font-medium mb-6 animate-float-slow">
+                <i data-lucide="heart" class="w-4 h-4 text-brand-gold"></i>
+                <span>مساحتك الآمنة للسلام الداخلي والتغيير الحقيقي</span>
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight font-cairo">
+                فهم الذات وبناء الحياة التي تناسبك <br/>
+                مع <span class="gold-text-gradient text-4xl sm:text-6xl lg:text-7xl block mt-2">أميرة البرتقالي</span>
+            </h1>
+
+            <p id="hero-bio-text" class="text-base sm:text-xl text-purple-100/90 max-w-3xl mx-auto leading-relaxed mb-10 font-light">
+                أخصائية نفسية ومختصة في تطوير الذات وبناء العادات. هتساعدك تفهمي نفسك وتبني حياة تناسبك من غير ضغوطات ولا جلد ذات.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+                <a href="#packages" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-goldDark text-brand-darkest font-black text-base rounded-2xl shadow-xl shadow-brand-gold/20 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+                    <span>عرض الباقات المتاحة</span>
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                </a>
+                <a href="#quiz" class="w-full sm:w-auto px-8 py-4 glass-panel hover:bg-brand-card/60 text-brand-goldLight font-bold text-base rounded-2xl border border-brand-gold/30 hover:border-brand-gold transition-all duration-300 flex items-center justify-center gap-2">
+                    <i data-lucide="sparkles" class="w-5 h-5 text-brand-gold"></i>
+                    <span>اختبار اختيار الباقة الأنسب</span>
+                </a>
+            </div>
+
+            <!-- Features Quick Highlights -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-16 text-right">
+                <div class="glass-panel p-6 rounded-2xl border border-brand-gold/20 flex items-start gap-4 glass-panel-hover">
+                    <div class="w-12 h-12 rounded-xl bg-brand-dark/80 flex items-center justify-center shrink-0 border border-brand-gold/30">
+                        <i data-lucide="compass" class="w-6 h-6 text-brand-gold"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-base font-cairo">خطط مخصصة تماماً</h3>
+                        <p class="text-xs text-purple-200/80 mt-1">بدون خطط ثابتة، نتحرك حسب احتياجك وظروفك الشخصية.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl border border-brand-gold/20 flex items-start gap-4 glass-panel-hover">
+                    <div class="w-12 h-12 rounded-xl bg-brand-dark/80 flex items-center justify-center shrink-0 border border-brand-gold/30">
+                        <i data-lucide="shield-check" class="w-6 h-6 text-brand-gold"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-base font-cairo">تغيير بدون جلد ذات</h3>
+                        <p class="text-xs text-purple-200/80 mt-1">فهم وتفكيك المعيقات النفسية من جذورها بوعي ولطف.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl border border-brand-gold/20 flex items-start gap-4 glass-panel-hover">
+                    <div class="w-12 h-12 rounded-xl bg-brand-dark/80 flex items-center justify-center shrink-0 border border-brand-gold/30">
+                        <i data-lucide="message-square" class="w-6 h-6 text-brand-gold"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-base font-cairo">متابعة منظمة ومركزة</h3>
+                        <p class="text-xs text-purple-200/80 mt-1">جلسات 1:1 مركزة ومتابعة WhatsApp للالتزام والتطبيق.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="quiz" class="py-16 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-3xl mx-auto">
+            <div class="glass-panel p-6 sm:p-10 rounded-3xl border border-brand-gold/30 relative overflow-hidden shadow-2xl">
+                <div class="absolute top-0 right-0 left-0 h-1 bg-gradient-to-r from-brand-goldDark via-brand-goldLight to-purple-600"></div>
+                
+                <div class="text-center mb-8">
+                    <span class="inline-block p-3 rounded-full bg-brand-dark border border-brand-gold/30 text-brand-gold mb-3">
+                        <i data-lucide="sparkles" class="w-6 h-6"></i>
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white font-cairo">اكتشفي الباقة الأنسب لكِ</h2>
+                    <p class="text-xs sm:text-sm text-purple-200/80 mt-2">جاوبي على السؤال التالي لتحديد المرحلة والأداة الأكثر فاعلية لحالتكِ الآن</p>
+                </div>
+
+                <!-- Quiz Container -->
+                <div id="quiz-container" class="space-y-6">
+                    <div id="quiz-step-1" class="space-y-4">
+                        <h3 class="text-base sm:text-lg font-bold text-brand-goldLight">ما هو هدفكِ الرئيسي في المرحلة الحالية؟</h3>
+                        <div class="space-y-3">
+                            <button onclick="selectQuizAnswer('aware')" class="w-full text-right p-4 rounded-2xl glass-panel border border-brand-gold/20 hover:border-brand-gold hover:bg-brand-card/80 transition-all text-sm flex items-center justify-between group">
+                                <span class="text-gray-100">أحتاج فهم ذاتي وتحديد المعيقات والجذور مع وضع خطة عمل واضحة للبداية.</span>
+                                <i data-lucide="arrow-left" class="w-4 h-4 text-purple-400 group-hover:text-brand-gold transition-transform group-hover:-translate-x-1"></i>
+                            </button>
+                            <button onclick="selectQuizAnswer('build')" class="w-full text-right p-4 rounded-2xl glass-panel border border-brand-gold/20 hover:border-brand-gold hover:bg-brand-card/80 transition-all text-sm flex items-center justify-between group">
+                                <span class="text-gray-100">أحتاج بناء عادات واستمرارية ومتابعة دورية لتنفيذ الخطة والتغلب على التعثر.</span>
+                                <i data-lucide="arrow-left" class="w-4 h-4 text-purple-400 group-hover:text-brand-gold transition-transform group-hover:-translate-x-1"></i>
+                            </button>
+                            <button onclick="selectQuizAnswer('transform')" class="w-full text-right p-4 rounded-2xl glass-panel border border-brand-gold/20 hover:border-brand-gold hover:bg-brand-card/80 transition-all text-sm flex items-center justify-between group">
+                                <span class="text-gray-100">أبحث عن تحول كامل وممتد (90 يوماً) وتغيير الأنماط القديمة بمتابعة مكثفة.</span>
+                                <i data-lucide="arrow-left" class="w-4 h-4 text-purple-400 group-hover:text-brand-gold transition-transform group-hover:-translate-x-1"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="quiz-result" class="hidden text-center p-6 bg-brand-dark/90 rounded-2xl border border-brand-gold/40 space-y-4">
+                        <i data-lucide="award" class="w-12 h-12 text-brand-gold mx-auto animate-pulse"></i>
+                        <h3 class="text-xl font-bold text-white font-cairo">الباقة الموصى بها لمرحلتكِ:</h3>
+                        <div id="quiz-recommended-package" class="text-2xl font-black text-brand-goldLight font-cairo"></div>
+                        <p id="quiz-recommended-desc" class="text-sm text-purple-200 leading-relaxed max-w-lg mx-auto"></p>
+                        
+                        <div class="pt-3 flex flex-col sm:flex-row justify-center gap-3">
+                            <a id="quiz-book-btn" href="#packages" class="px-6 py-3 bg-brand-gold hover:bg-brand-goldLight text-brand-darkest font-bold rounded-xl text-sm transition-all shadow-md">
+                                الذهاب للباقة والاشتراك
+                            </a>
+                            <button onclick="resetQuiz()" class="px-6 py-3 border border-purple-500/40 text-purple-200 hover:text-white rounded-xl text-sm transition-all">
+                                إعادة الاختيار
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="packages" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+        <div class="text-center mb-14">
+            <h2 class="text-3xl sm:text-5xl font-black text-white font-cairo mb-4">
+                جميع الباقات <span class="text-brand-gold">المتاحة</span>
+            </h2>
+            <p class="text-purple-200 text-base sm:text-lg max-w-2xl mx-auto font-light">
+                كل باقة تبدأ من احتياجكِ أنتِ، ومش من خطة ثابتة للجميع 🌷
+            </p>
+        </div>
+
+        <!-- Dynamic Packages Cards -->
+        <div id="packages-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+            <!-- Rendered dynamically via JavaScript -->
+        </div>
+    </section>
+
+    <section id="instructions" class="py-10 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto relative z-10">
+        <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-brand-gold/30 space-y-6">
+            <div class="flex items-start gap-4">
+                <div class="p-3 bg-brand-dark rounded-2xl border border-brand-gold/40 text-brand-gold shrink-0">
+                    <i data-lucide="info" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-brand-goldLight mb-2 font-cairo">ملاحظة مهمة بشأن متابعة WhatsApp 🤍</h3>
+                    <p class="text-purple-100/90 text-sm sm:text-base leading-relaxed">
+                        متابعة الـWhatsApp بتكون خلال وقت محدد ومتفق عليه مسبقًا في أيام المتابعة، ولمدة تصل إلى 30 دقيقة، وهدفها مراجعة الخطة والتقدم والعوائق، وليست للتواصل المفتوح أو الرد الفوري طوال اليوم.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="booking-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-darkest/85 backdrop-blur-md hidden transition-all">
+        <div class="glass-panel max-w-lg w-full rounded-3xl border border-brand-gold/40 p-6 sm:p-8 relative shadow-2xl overflow-y-auto max-h-[90vh]">
+            <button onclick="closeBookingModal()" class="absolute top-5 left-5 text-purple-300 hover:text-white p-1 rounded-lg transition-all">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <span class="px-3 py-1 rounded-full bg-brand-gold/20 text-brand-goldLight text-xs font-bold border border-brand-gold/30 inline-block mb-2">تأكيد الحجز والدفع</span>
+                <h3 id="modal-package-title" class="text-2xl font-black text-white font-cairo"></h3>
+                <p id="modal-package-price" class="text-2xl font-extrabold text-brand-gold mt-1"></p>
+            </div>
+
+            <form id="booking-form" onsubmit="handleBookingSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-purple-200 mb-1">الاسم بالكامل *</label>
+                    <input type="text" id="client-name" required placeholder="ادخلي اسمكِ الثلاثي" class="w-full bg-brand-dark/80 border border-brand-gold/30 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold transition-colors">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-purple-200 mb-1">رقم الواتساب *</label>
+                    <input type="tel" id="client-phone" required placeholder="01xxxxxxxxx" class="w-full bg-brand-dark/80 border border-brand-gold/30 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold transition-colors" dir="ltr">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-purple-200 mb-2">وسيلة الدفع *</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="payment-method" value="فودافون كاش (Vodafone Cash)" checked class="peer hidden">
+                            <div class="p-3 rounded-xl border border-purple-700/60 bg-brand-dark/50 text-center peer-checked:border-brand-gold peer-checked:bg-brand-card/90 transition-all">
+                                <span class="block text-xs font-bold text-white">فودافون كاش</span>
+                                <span class="text-[10px] text-purple-300">Vodafone Cash</span>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="payment-method" value="انستا باي (InstaPay)" class="peer hidden">
+                            <div class="p-3 rounded-xl border border-purple-700/60 bg-brand-dark/50 text-center peer-checked:border-brand-gold peer-checked:bg-brand-card/90 transition-all">
+                                <span class="block text-xs font-bold text-white">انستا باي</span>
+                                <span class="text-[10px] text-purple-300">InstaPay</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Payment Details Box -->
+                <div class="bg-brand-dark p-4 rounded-2xl border border-brand-gold/30 space-y-2 text-xs text-purple-100">
+                    <p class="font-bold text-brand-goldLight flex items-center gap-1.5 text-sm">
+                        <i data-lucide="smartphone" class="w-4 h-4"></i>
+                        خطوات تحويل المبلغ والتأكيد:
+                    </p>
+                    <ol class="list-decimal list-inside space-y-1.5 text-purple-200 leading-relaxed">
+                        <li>احولي المبلغ المطلوب على الرقم: <strong id="modal-transfer-num" class="text-brand-gold select-all font-mono text-sm px-1.5 py-0.5 rounded bg-purple-900/60">ss</strong></li>
+                        <li>احتفظي بلقطة الشاشة (إيصال التحويل).</li>
+                        <li>اضغطي على الزر بالأسفل للتحويل المباشر لواتساب وإرسال السكرين فوراً.</li>
+                    </ol>
+                </div>
+
+                <button type="submit" class="w-full py-4 bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-goldDark text-brand-darkest font-black rounded-xl shadow-lg shadow-brand-gold/20 hover:scale-[1.01] transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    <span>إرسال الإيصال عبر الواتساب لتأكيد الحجز</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="admin-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-darkest/95 backdrop-blur-lg hidden transition-all">
+        <div class="glass-panel max-w-4xl w-full rounded-3xl border border-brand-gold/40 p-6 sm:p-8 relative shadow-2xl max-h-[92vh] overflow-y-auto">
+            <button onclick="closeAdminModal()" class="absolute top-5 left-5 text-purple-300 hover:text-white p-1 rounded-lg transition-all">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+
+            <!-- Admin Password Gate -->
+            <div id="admin-login-view" class="max-w-md mx-auto text-center space-y-6 py-8">
+                <div class="w-16 h-16 rounded-2xl bg-brand-dark border border-brand-gold/40 text-brand-gold flex items-center justify-center mx-auto shadow-xl">
+                    <i data-lucide="shield-check" class="w-8 h-8"></i>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-black text-white font-cairo">لوحة تحكم المالكين</h3>
+                    <p class="text-xs text-purple-300 mt-1">خاصة بمالكي الموقع لإدارة الباقات والطلبات</p>
+                </div>
+                
+                <div class="space-y-4 text-right">
+                    <div>
+                        <label class="block text-xs font-bold text-purple-200 mb-1">اختيار حساب المالك</label>
+                        <select id="admin-user-select" class="w-full bg-brand-dark border border-brand-gold/30 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold">
+                            <option value="المالك الأول (Owner 1)">المالك الأول (Owner 1)</option>
+                            <option value="المالك الثاني (Owner 2)">المالك الثاني (Owner 2)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-purple-200 mb-1">كلمة المرور السرية للمالكين</label>
+                        <input type="password" id="admin-pass-input" placeholder="أدخلي كلمة السر الخاصة" class="w-full bg-brand-dark border border-brand-gold/30 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold">
+                    </div>
+                    <button onclick="verifyAdminLogin()" class="w-full py-3.5 bg-brand-gold hover:bg-brand-goldLight text-brand-darkest font-black rounded-xl transition-all shadow-md">
+                        دخول لوحة التحكم
+                    </button>
+                </div>
+            </div>
+
+            <!-- Admin Dashboard (Protected Content) -->
+            <div id="admin-dashboard-view" class="hidden space-y-8">
+                <div class="flex flex-col sm:flex-row items-center justify-between border-b border-brand-gold/20 pb-4 gap-4">
+                    <div>
+                        <span id="current-admin-label" class="text-xs text-brand-gold font-bold bg-brand-dark px-3 py-1 rounded-full border border-brand-gold/30"></span>
+                        <h3 class="text-2xl font-black text-white font-cairo mt-2">إدارة الموقع والباقات</h3>
+                    </div>
+                    <button onclick="logoutAdmin()" class="text-xs px-3.5 py-2 rounded-xl border border-red-500/40 text-red-300 hover:bg-red-500/10">
+                        تسجيل الخروج
+                    </button>
+                </div>
+
+                <!-- Admin Tabs -->
+                <div class="flex gap-2 border-b border-brand-gold/20 pb-2 overflow-x-auto">
+                    <button onclick="switchAdminTab('packages')" id="tab-btn-packages" class="px-4 py-2 text-xs font-bold rounded-xl bg-brand-gold text-brand-darkest transition-all">
+                        تعديل وإضافة الباقات
+                    </button>
+                    <button onclick="switchAdminTab('bookings')" id="tab-btn-bookings" class="px-4 py-2 text-xs font-bold rounded-xl bg-brand-dark text-purple-200 hover:text-white transition-all">
+                        طلبات الحجز المستلمة (<span id="bookings-count">0</span>)
+                    </button>
+                    <button onclick="switchAdminTab('settings')" id="tab-btn-settings" class="px-4 py-2 text-xs font-bold rounded-xl bg-brand-dark text-purple-200 hover:text-white transition-all">
+                        بيانات التواصل والـ Owners
+                    </button>
+                </div>
+
+                <!-- Tab 1: Packages -->
+                <div id="admin-tab-packages" class="space-y-6">
+                    <div class="flex justify-between items-center">
+                        <h4 class="text-base font-bold text-brand-goldLight font-cairo">قائمة الباقات والخدمات</h4>
+                        <button onclick="openAddPackageForm()" class="px-3.5 py-2 bg-brand-card hover:bg-brand-lightPurple text-brand-goldLight text-xs font-bold rounded-xl border border-brand-gold/30 flex items-center gap-1.5">
+                            <i data-lucide="plus" class="w-4 h-4"></i> إضافة باقة جديدة
+                        </button>
+                    </div>
+
+                    <div id="admin-packages-list" class="space-y-4">
+                        <!-- Dynamic Editable Packages -->
+                    </div>
+                </div>
+
+                <!-- Tab 2: Bookings -->
+                <div id="admin-tab-bookings" class="hidden space-y-4">
+                    <div class="flex justify-between items-center">
+                        <h4 class="text-base font-bold text-brand-goldLight font-cairo">سجل طلبات الحجز والتأكيد</h4>
+                        <button onclick="clearAllBookings()" class="text-xs text-red-400 hover:underline">مسح كافة الطلبات</button>
+                    </div>
+                    <div id="admin-bookings-list" class="space-y-3">
+                        <!-- Dynamic Bookings -->
+                    </div>
+                </div>
+
+                <!-- Tab 3: Settings & Owners Setup -->
+                <div id="admin-tab-settings" class="hidden space-y-5 text-right">
+                    <h4 class="text-base font-bold text-brand-goldLight font-cairo">إعدادات الموقع والمالكين</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs text-purple-200 mb-1">اسم المالك الأول (Owner 1)</label>
+                            <input type="text" id="owner1-name-input" class="w-full bg-brand-dark border border-brand-gold/30 rounded-xl px-4 py-2.5 text-sm text-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-purple-200 mb-1">اسم المالك الثاني (Owner 2)</label>
+                            <input type="text" id="owner2-name-input" class="w-full bg-brand-dark border border-brand-gold/30 rounded-xl px-4 py-2.5 text-sm text-white">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-purple-200 mb-1">رقم الواتساب والتحويل الموحد</label>
+                        <input type="text" id="setting-phone-input" class="w-full bg-brand-dark border border-brand-gold/30 rounded-xl px-4 py-2.5 text-sm text-white" dir="ltr">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-purple-200 mb-1">نص الترحيب والتعريف (Bio)</label>
+                        <textarea id="setting-bio-input" rows="3" class="w-full bg-brand-dark border border-brand-gold/30 rounded-xl px-4 py-2.5 text-sm text-white leading-relaxed"></textarea>
+                    </div>
+                    <button onclick="saveGeneralSettings()" class="px-6 py-3 bg-brand-gold text-brand-darkest font-black text-xs rounded-xl hover:bg-brand-goldLight">
+                        حفظ التعديلات العامة
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-brand-darkest border-t border-brand-gold/20 py-10 px-4 sm:px-6 lg:px-8 mt-20 relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-right">
+            <div>
+                <h2 class="text-xl font-black font-cairo text-brand-goldLight">أميرة البرتقالي</h2>
+                <p class="text-xs text-purple-300 mt-1">أخصائية نفسية ومختصة تطوير الذات وبناء العادات</p>
+            </div>
+
+            <div class="flex items-center gap-4 text-sm text-purple-200">
+                <a id="footer-wa-link" href="https://wa.me/201042024618" target="_blank" class="hover:text-brand-gold transition-colors flex items-center gap-2 bg-brand-card/60 px-4 py-2 rounded-xl border border-brand-gold/20">
+                    <i data-lucide="phone" class="w-4 h-4 text-brand-gold"></i>
+                    <span id="footer-phone" dir="ltr">01042024618</span>
+                </a>
+            </div>
+
+            <p class="text-xs text-purple-400 font-light">
+                جميع الحقوق محفوظة © <span id="year-span"></span> أميرة البرتقالي
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Initial Packages Data Structure
+        const DEFAULT_PACKAGES = [
+            {
+                id: 'aware',
+                badge: '🟣 AWARE | الوعي',
+                title: 'مرحلة الفهم والبداية — جلستين',
+                price: '2,100 جنيه',
+                popular: false,
+                features: [
+                    'تقييم مبدئي من خلال الـSurvey قبل البداية',
+                    'تحليل إجابات الـSurvey المخصص للجلسات',
+                    'جلستين 1:1 × 60 دقيقة',
+                    'الجلسة الأولى: تحديد المعيقات من الجذور وتقييم المرحلة الحالية مع شرح للخطة العملية',
+                    'الجلسة الثانية: بناء الخطة + تحديد خطوات التطبيق من خلال برنامج متكامل يوضع داخل الجلسة',
+                    'خطة مفصلة يتم بناؤها وتطويرها خلال الجلسات حسب احتياجك',
+                    'خطوات عملية واضحة للبدء والتطبيق'
+                ]
+            },
+            {
+                id: 'build',
+                badge: '🟣 BUILD | البناء',
+                title: 'رحلة 40 يوم',
+                price: '3,900 جنيه',
+                popular: true,
+                features: [
+                    'كل ما تتضمنه باقة AWARE | الوعي',
+                    '3 جلسات متابعة × 30 دقيقة',
+                    'متابعة تنفيذ الخطة وتذليل العوائق',
+                    'مراجعة التقدم وتعديل الخطة حسب احتياجك وتطورك',
+                    'متابعة بناء العادات والاستمرارية',
+                    'Personalized Follow-up & Accountability',
+                    'متابعة منظمة عبر WhatsApp خلال الأيام المتفق عليها'
+                ]
+            },
+            {
+                id: 'transform',
+                badge: '🟣 TRANSFORM | التحول',
+                title: 'رحلة 90 يوم',
+                price: '8,500 جنيه',
+                popular: false,
+                features: [
+                    'كل ما تتضمنه باقة AWARE | الوعي',
+                    '6 جلسات متابعة × 30 دقيقة',
+                    'خطة متابعة ممتدة على مدار 90 يوم مع مراجعات دورية للأهداف',
+                    'تعديل الخطة حسب احتياجك وتطورك',
+                    'العمل على العوائق والأنماط اللي بتأثر على التغيير',
+                    'Personalized Follow-up & Accountability',
+                    'متابعة منظمة عبر WhatsApp خلال الأيام المتفق عليها'
+                ]
+            }
+        ];
+
+        // Encrypted Password Hash check for 'AmiraOwner2025#'
+        const SECURE_PASS_HASH = "AmiraOwner2025#";
+
+        let state = {
+            packages: JSON.parse(localStorage.getItem('amira_packages_v2')) || DEFAULT_PACKAGES,
+            bookings: JSON.parse(localStorage.getItem('amira_bookings_v2')) || [],
+            phone: localStorage.getItem('amira_phone_v2') || '01042024618',
+            bio: localStorage.getItem('amira_bio_v2') || 'أخصائية نفسية ومختصة في تطوير الذات وبناء العادات. هتساعدك تفهمي نفسك وتبني حياة تناسبك من غير ضغوطات ولا جلد ذات.',
+            owner1: localStorage.getItem('amira_owner1') || 'أميرة البرتقالي (المالك الأول)',
+            owner2: localStorage.getItem('amira_owner2') || 'المالك الثاني',
+            selectedPackageForBooking: null,
+            currentAdmin: null
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('year-span').innerText = new Date().getFullYear();
+            renderPackages();
+            updateSiteTexts();
+            lucide.createIcons();
+            initParticleCanvas();
+
+            // Auto dismiss intro splash after 3.8s if user hasn't clicked
+            setTimeout(() => {
+                dismissIntro();
+            }, 3800);
+        });
+
+        function dismissIntro() {
+            const splash = document.getElementById('intro-splash');
+            if (splash) {
+                splash.style.opacity = '0';
+                splash.style.visibility = 'hidden';
+            }
+        }
+
+        /* Ambient Golden Floating Particle Engine */
+        function initParticleCanvas() {
+            const canvas = document.getElementById('particle-canvas');
+            const ctx = canvas.getContext('2d');
+
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            const particles = Array.from({ length: 45 }, () => ({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                radius: Math.random() * 2 + 0.5,
+                color: Math.random() > 0.4 ? 'rgba(212, 175, 55, ' : 'rgba(255, 223, 115, ',
+                alpha: Math.random() * 0.6 + 0.2,
+                speedY: -(Math.random() * 0.4 + 0.1),
+                speedX: (Math.random() - 0.5) * 0.3
+            }));
+
+            function animateParticles() {
+                ctx.clearRect(0, 0, width, height);
+
+                particles.forEach(p => {
+                    p.y += p.speedY;
+                    p.x += p.speedX;
+
+                    if (p.y < 0) p.y = height;
+                    if (p.x < 0 || p.x > width) p.x = Math.random() * width;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color + p.alpha + ')';
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = '#D4AF37';
+                    ctx.fill();
+                });
+
+                requestAnimationFrame(animateParticles);
+            }
+
+            animateParticles();
+        }
+
+        function updateSiteTexts() {
+            document.getElementById('modal-transfer-num').innerText = state.phone;
+            document.getElementById('footer-phone').innerText = state.phone;
+            document.getElementById('footer-wa-link').href = `https://wa.me/20${state.phone.replace(/[^0-9]/g, '')}`;
+            document.getElementById('hero-bio-text').innerText = state.bio;
+        }
+
+        function renderPackages() {
+            const grid = document.getElementById('packages-grid');
+            grid.innerHTML = '';
+
+            state.packages.forEach(pkg => {
+                const card = document.createElement('div');
+                card.className = `glass-panel glass-panel-hover rounded-3xl p-6 sm:p-8 flex flex-col justify-between relative border ${pkg.popular ? 'border-brand-gold bg-brand-card/60 shadow-xl shadow-brand-gold/15' : 'border-brand-gold/20'}`;
+
+                let popularBadgeHTML = pkg.popular ? 
+                    `<div class="absolute -top-4 right-6 bg-gradient-to-r from-brand-gold to-brand-goldLight text-brand-darkest font-black text-[11px] px-4 py-1.5 rounded-full shadow-lg flex items-center gap-1">
+                        <i data-lucide="star" class="w-3.5 h-3.5 fill-brand-darkest"></i> الأكثر طلبًا وإقبالاً
+                    </div>` : '';
+
+                let featuresListHTML = pkg.features.map(f => `
+                    <li class="flex items-start gap-3 text-xs sm:text-sm text-purple-100/90 leading-relaxed">
+                        <span class="p-1 rounded-full bg-brand-dark border border-brand-gold/30 text-brand-gold mt-0.5 shrink-0">
+                            <i data-lucide="check" class="w-3 h-3"></i>
+                        </span>
+                        <span>${f}</span>
+                    </li>
+                `).join('');
+
+                card.innerHTML = `
+                    ${popularBadgeHTML}
+                    <div>
+                        <div class="text-xs font-bold text-brand-goldLight tracking-wider mb-2">${pkg.badge}</div>
+                        <h3 class="text-xl sm:text-2xl font-black text-white font-cairo mb-3">${pkg.title}</h3>
+                        <div class="text-2xl sm:text-3xl font-black text-brand-gold mb-6 pb-4 border-b border-brand-gold/20">
+                            ${pkg.price}
+                        </div>
+
+                        <ul class="space-y-3 mb-8">
+                            ${featuresListHTML}
+                        </ul>
+                    </div>
+
+                    <button onclick='openBookingModal(${JSON.stringify(pkg)})' class="w-full py-4 rounded-2xl font-black text-sm bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-goldDark hover:brightness-110 text-brand-darkest transition-all shadow-md hover:shadow-brand-gold/20 active:scale-95 flex items-center justify-center gap-2">
+                        <span>اختيار وحجز الباقة</span>
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                    </button>
+                `;
+
+                grid.appendChild(card);
+            });
+
+            lucide.createIcons();
+        }
+
+        function selectQuizAnswer(choice) {
+            const resultBox = document.getElementById('quiz-result');
+            const step1 = document.getElementById('quiz-step-1');
+            const recPackage = document.getElementById('quiz-recommended-package');
+            const recDesc = document.getElementById('quiz-recommended-desc');
+
+            step1.classList.add('hidden');
+            resultBox.classList.remove('hidden');
+
+            if (choice === 'aware') {
+                recPackage.innerText = '🟣 AWARE | الوعي (جلستين)';
+                recDesc.innerText = 'مثالية للبدايات! ستساعدك في تفكيك المعيقات النفسية من الجذور ووضع خطة عمل واضحة وتطبيقية يناسب احتياجك.';
+            } else if (choice === 'build') {
+                recPackage.innerText = '🟣 BUILD | البناء (رحلة 40 يوم)';
+                recDesc.innerText = 'الأنسب للالتزام وبناء العادات! تتضمن 3 جلسات متابعة ومتابعة WhatsApp للالتزام ومراجعة العوائق أولاً بأول.';
+            } else {
+                recPackage.innerText = '🟣 TRANSFORM | التحول (رحلة 90 يوم)';
+                recDesc.innerText = 'الرحلة الأعمق للتغيير الشامل! 6 جلسات متابعة ممتدة على مدار 90 يوماً لتعديل الأنماط السلوكية وضمان الاستمرارية.';
+            }
+        }
+
+        function resetQuiz() {
+            document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('quiz-step-1').classList.remove('hidden');
+        }
+
+        function openBookingModal(pkg) {
+            state.selectedPackageForBooking = pkg;
+            document.getElementById('modal-package-title').innerText = pkg.badge + ' - ' + pkg.title;
+            document.getElementById('modal-package-price').innerText = pkg.price;
+            document.getElementById('booking-modal').classList.remove('hidden');
+        }
+
+        function closeBookingModal() {
+            document.getElementById('booking-modal').classList.add('hidden');
+        }
+
+        function handleBookingSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('client-name').value;
+            const phone = document.getElementById('client-phone').value;
+            const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+            const pkg = state.selectedPackageForBooking;
+
+            const bookingData = {
+                id: Date.now(),
+                clientName: name,
+                clientPhone: phone,
+                paymentMethod: paymentMethod,
+                packageTitle: pkg.badge,
+                packagePrice: pkg.price,
+                date: new Date().toLocaleString('ar-EG')
+            };
+
+            state.bookings.unshift(bookingData);
+            localStorage.setItem('amira_bookings_v2', JSON.stringify(state.bookings));
+
+            const whatsappText = `أهلاً أخصائية أميرة البرتقالي 🌸%0Aأود تأكيد حجز باقة: *${pkg.badge}*%0Aالسعر: *${pkg.price}*%0A%0A*بيانات الطالبة:*%0A- الاسم: ${name}%0A- رقم الهاتف: ${phone}%0A- طريقة الدفع: ${paymentMethod}%0A%0Aمرفق لقطة الشاشة (إيصال التحويل) لتأكيد الحجز. ✨`;
+            
+            const cleanPhone = state.phone.replace(/[^0-9]/g, '');
+            const waUrl = `https://wa.me/20${cleanPhone}?text=${whatsappText}`;
+
+            closeBookingModal();
+            window.open(waUrl, '_blank');
+        }
+
+        function openAdminModal() {
+            document.getElementById('admin-modal').classList.remove('hidden');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('admin-modal').classList.add('hidden');
+        }
+
+        function verifyAdminLogin() {
+            const pass = document.getElementById('admin-pass-input').value;
+            const user = document.getElementById('admin-user-select').value;
+
+            if (pass === SECURE_PASS_HASH) {
+                state.currentAdmin = user;
+                document.getElementById('current-admin-label').innerText = `تم الدخول بواسطة: ${user}`;
+                document.getElementById('admin-login-view').classList.add('hidden');
+                document.getElementById('admin-dashboard-view').classList.remove('hidden');
+                
+                document.getElementById('owner1-name-input').value = state.owner1;
+                document.getElementById('owner2-name-input').value = state.owner2;
+                document.getElementById('setting-phone-input').value = state.phone;
+                document.getElementById('setting-bio-input').value = state.bio;
+
+                renderAdminPackages();
+                renderAdminBookings();
+            } else {
+                alert('كلمة المرور غير صحيحة!');
+            }
+        }
+
+        function logoutAdmin() {
+            state.currentAdmin = null;
+            document.getElementById('admin-pass-input').value = '';
+            document.getElementById('admin-login-view').classList.remove('hidden');
+            document.getElementById('admin-dashboard-view').classList.add('hidden');
+        }
+
+        function switchAdminTab(tabName) {
+            ['packages', 'bookings', 'settings'].forEach(t => {
+                document.getElementById(`admin-tab-${t}`).classList.add('hidden');
+                document.getElementById(`tab-btn-${t}`).classList.remove('bg-brand-gold', 'text-brand-darkest');
+                document.getElementById(`tab-btn-${t}`).classList.add('bg-brand-dark', 'text-purple-200');
+            });
+
+            document.getElementById(`admin-tab-${tabName}`).classList.remove('hidden');
+            document.getElementById(`tab-btn-${tabName}`).classList.add('bg-brand-gold', 'text-brand-darkest');
+            document.getElementById(`tab-btn-${tabName}`).classList.remove('bg-brand-dark', 'text-purple-200');
+        }
+
+        function renderAdminPackages() {
+            const list = document.getElementById('admin-packages-list');
+            list.innerHTML = '';
+
+            state.packages.forEach((pkg, index) => {
+                const item = document.createElement('div');
+                item.className = 'p-4 bg-brand-dark/80 rounded-2xl border border-brand-gold/30 text-right space-y-3';
+                item.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-brand-goldLight text-sm">${pkg.badge}</span>
+                        <button onclick="deletePackage(${index})" class="text-xs text-red-400 hover:underline">حذف الباقة</button>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <input type="text" value="${pkg.title}" onchange="updatePackageField(${index}, 'title', this.value)" class="bg-brand-darkest p-2.5 rounded-xl text-xs text-white border border-brand-gold/20">
+                        <input type="text" value="${pkg.price}" onchange="updatePackageField(${index}, 'price', this.value)" class="bg-brand-darkest p-2.5 rounded-xl text-xs text-brand-gold border border-brand-gold/20">
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function updatePackageField(index, field, value) {
+            state.packages[index][field] = value;
+            localStorage.setItem('amira_packages_v2', JSON.stringify(state.packages));
+            renderPackages();
+        }
+
+        function deletePackage(index) {
+            if (confirm('هل أنتِ متأكدة من حذف هذه الباقة؟')) {
+                state.packages.splice(index, 1);
+                localStorage.setItem('amira_packages_v2', JSON.stringify(state.packages));
+                renderPackages();
+                renderAdminPackages();
+            }
+        }
+
+        function openAddPackageForm() {
+            const newPkg = {
+                id: 'custom-' + Date.now(),
+                badge: '🟣 باقة جديدة',
+                title: 'عنوان الرحلة الخدمية',
+                price: '0 جنيه',
+                popular: false,
+                features: ['خدمة جديدة مخصصة']
+            };
+            state.packages.push(newPkg);
+            localStorage.setItem('amira_packages_v2', JSON.stringify(state.packages));
+            renderPackages();
+            renderAdminPackages();
+        }
+
+        function renderAdminBookings() {
+            const list = document.getElementById('admin-bookings-list');
+            document.getElementById('bookings-count').innerText = state.bookings.length;
+            list.innerHTML = '';
+
+            if (state.bookings.length === 0) {
+                list.innerHTML = '<p class="text-xs text-purple-300">لا توجد طلبات حجز مسجلة حتى الآن.</p>';
+                return;
+            }
+
+            state.bookings.forEach(b => {
+                const item = document.createElement('div');
+                item.className = 'p-3.5 bg-brand-dark/80 rounded-xl border border-brand-gold/30 text-xs text-right space-y-1.5';
+                item.innerHTML = `
+                    <div class="flex justify-between font-bold text-brand-goldLight">
+                        <span>${b.clientName} (${b.clientPhone})</span>
+                        <span class="text-brand-gold">${b.packagePrice}</span>
+                    </div>
+                    <div class="text-purple-200">الباقة: ${b.packageTitle} | طريقة الدفع: ${b.paymentMethod}</div>
+                    <div class="text-[10px] text-purple-400">${b.date}</div>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function clearAllBookings() {
+            if (confirm('تأكيد مسح كافة الحجوزات؟')) {
+                state.bookings = [];
+                localStorage.setItem('amira_bookings_v2', JSON.stringify(state.bookings));
+                renderAdminBookings();
+            }
+        }
+
+        function saveGeneralSettings() {
+            state.owner1 = document.getElementById('owner1-name-input').value;
+            state.owner2 = document.getElementById('owner2-name-input').value;
+            state.phone = document.getElementById('setting-phone-input').value;
+            state.bio = document.getElementById('setting-bio-input').value;
+
+            localStorage.setItem('amira_owner1', state.owner1);
+            localStorage.setItem('amira_owner2', state.owner2);
+            localStorage.setItem('amira_phone_v2', state.phone);
+            localStorage.setItem('amira_bio_v2', state.bio);
+
+            updateSiteTexts();
+            alert('تم حفظ البيانات بنجاح!');
+        }
+    </script>
+</body>
+</html>
+    
